@@ -1,0 +1,14 @@
+<h2>My Heroes</h2>
+<ul class="heroes">
+    <li *ngFor="let hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+</ul>
+<div *ngIf="selectedHero">
+    <h2>
+        {{selectedHero.name | uppercase}} is my hero<!--The hero's name is displayed in capital letters because of the uppercase pipe that's included in the interpolation binding, right after the pipe operator ( | ).-->
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>
