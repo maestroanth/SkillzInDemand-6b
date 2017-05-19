@@ -19,6 +19,19 @@ var hero_detail_component_1 = require("./hero-detail.component");
 var hero_service_1 = require("./hero.service");
 var dashboard_component_1 = require("./dashboard.component");
 var app_routing_module_1 = require("./app-routing.module");
+var hero_search_component_1 = require("./hero-search.component");
+/*NOTES
+An Observable is a stream of events that you can process with array-like operators.
+
+Angular core has basic support for observables. Developers augment that support with
+operators and extensions from the RxJS library. (i.e. .toPromise())
+
+But requests aren't always done only once. You may start one request, cancel it, and make a different request before the server has responded to the first request.
+
+A request-cancel-new-request sequence is difficult to implement with Promises, but easy with Observables.
+
+
+*/
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,7 +50,8 @@ AppModule = __decorate([
             app_component_1.AppComponent,
             dashboard_component_1.DashboardComponent,
             hero_detail_component_1.HeroDetailComponent,
-            heroes_component_1.HeroesComponent
+            heroes_component_1.HeroesComponent,
+            hero_search_component_1.HeroSearchComponent
         ],
         providers: [
             hero_service_1.HeroService //provides this service as singleton when from root (get rid of them in other components to prevent multiple instances)
