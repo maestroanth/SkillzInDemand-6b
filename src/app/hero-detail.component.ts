@@ -16,6 +16,7 @@ export class HeroDetailComponent implements OnInit {
     constructor(
         private heroService: HeroService,
         private route: ActivatedRoute,
+
         private location: Location
     ) { }
     @Input() hero: Hero;
@@ -25,8 +26,14 @@ export class HeroDetailComponent implements OnInit {
             .subscribe(hero => this.hero = hero);
         //no need to unsubscribe framework cleans this up when component is destroyed
     }
-
+    //back button
     goBack(): void {
         this.location.back();
     }
+    //save button
+    save(): void {
+        this.heroService.update(this.hero)
+            .then(() => this.goBack());
+    }
+ 
 }

@@ -28,8 +28,15 @@ var HeroDetailComponent = (function () {
             .subscribe(function (hero) { return _this.hero = hero; });
         //no need to unsubscribe framework cleans this up when component is destroyed
     };
+    //back button
     HeroDetailComponent.prototype.goBack = function () {
         this.location.back();
+    };
+    //save button
+    HeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.heroService.update(this.hero)
+            .then(function () { return _this.goBack(); });
     };
     return HeroDetailComponent;
 }());

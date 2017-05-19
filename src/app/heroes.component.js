@@ -31,6 +31,32 @@ var HeroesComponent = (function () {
     HeroesComponent.prototype.gotoDetail = function () {
         this.router.navigate(['/detail', this.selectedHero.id]);
     };
+    //responds to save click event, pushes hero to database
+    HeroesComponent.prototype.add = function (name) {
+        var _this = this;
+        name = name.trim();
+        if (!name) {
+            return;
+        } //when given name is not blank (and save event was clicked remember), this delegates the responsibility to the hero service
+        this.heroService.create(name)
+            .then(function (hero) {
+            _this.heroes.push(hero);
+            _this.selectedHero = null; //clears name selection here
+        });
+    };
+    //responds to 'x' click event, pulls hero from database
+    HeroesComponent.prototype.delete = function (hero) {
+        var _this = this;
+        this.heroService
+            .delete(hero.id) //calls delete function here (delegates to herosevice of course)
+            .then(function () {
+            _this.heroes = _this.heroes.filter(function (h) { return h !== hero; }); //.filters out everything that is not 'hero' and includes only those in display array
+            //I have no idea how 'h' nows it is supposed to be here, I suppose from the this.heroes reference
+            if (_this.selectedHero === hero) {
+                _this.selectedHero = null;
+            }
+        });
+    };
     return HeroesComponent;
 }());
 HeroesComponent = __decorate([
